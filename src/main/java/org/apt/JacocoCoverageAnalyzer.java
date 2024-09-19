@@ -34,20 +34,23 @@ public class JacocoCoverageAnalyzer {
 
         // 遍历所有类的覆盖率
         coverageBuilder.getClasses().forEach(classCoverage -> {
-            System.out.println("类名: " + classCoverage.getName());
+            System.out.println("Class name: " + classCoverage.getName());
             if (classCoverage.getName().equals(targetClassName)) {
                 if (targetMethodName != null) {
                     // 输出指定方法的覆盖率
                     classCoverage.getMethods().forEach(methodCoverage -> {
                         if (methodCoverage.getName().equals(targetMethodName)) {
-                            System.out.println("覆盖率: " + methodCoverage.getInstructionCounter().getCoveredRatio());
+                            System.out.println("Instruction Coverage: " + methodCoverage.getInstructionCounter().getCoveredRatio());
+                            System.out.println("Branch Coverage: " + methodCoverage.getBranchCounter().getCoveredRatio());
+                            System.out.println("Line Coverage: " + methodCoverage.getLineCounter().getCoveredRatio());
                         }
                     });
                 } else {
                     // 输出所有方法的覆盖率
                     classCoverage.getMethods().forEach(methodCoverage -> {
-                        System.out.println(methodCoverage.getName() + methodCoverage.getDesc() + ": " + methodCoverage.getInstructionCounter().getCoveredRatio());
-                    });
+                        System.out.println("Instruction Coverage: " + methodCoverage.getInstructionCounter().getCoveredRatio());
+                        System.out.println("Branch Coverage: " + methodCoverage.getBranchCounter().getCoveredRatio());
+                        System.out.println("Line Coverage: " + methodCoverage.getLineCounter().getCoveredRatio());                    });
                 }
             }
         });
